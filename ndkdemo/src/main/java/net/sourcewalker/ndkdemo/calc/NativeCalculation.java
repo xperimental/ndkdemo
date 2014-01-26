@@ -30,7 +30,7 @@ public class NativeCalculation implements Calculation {
     public native int countPrimes(int limit);
 
     static {
-        System.loadLibrary("x86-demo");
+        System.loadLibrary("ndkdemo");
     }
 
 }
