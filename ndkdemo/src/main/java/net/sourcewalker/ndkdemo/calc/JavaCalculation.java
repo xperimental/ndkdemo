@@ -40,14 +40,24 @@ public class JavaCalculation implements Calculation {
     }
 
     private String getPrimes(boolean[] numbers) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i <= limit; i++) {
-            if (!numbers[i]) {
-                sb.append(i);
-                sb.append(", ");
+        if (limit > 1000) {
+            int count = 0;
+            for (boolean b : numbers) {
+                if (!b) {
+                    count++;
+                }
             }
+            return String.format("%d primes found.", count);
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= limit; i++) {
+                if (!numbers[i]) {
+                    sb.append(i);
+                    sb.append(", ");
+                }
+            }
+            return sb.toString();
         }
-        return sb.toString();
     }
 
     private void markNonPrimes(boolean[] numbers, int p) {
