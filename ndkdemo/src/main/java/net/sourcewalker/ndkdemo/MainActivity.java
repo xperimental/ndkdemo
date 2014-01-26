@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import net.sourcewalker.ndkdemo.calc.Calculation;
 import net.sourcewalker.ndkdemo.calc.JavaCalculation;
+import net.sourcewalker.ndkdemo.calc.NativeCalculation;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -52,8 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         Calculation calc;
         if (mUseNative.isChecked()) {
-            mResults.setText("error: native not implemented");
-            return;
+            calc = new NativeCalculation(limit);
         } else {
             calc = new JavaCalculation(limit.intValue());
         }
