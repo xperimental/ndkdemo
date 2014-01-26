@@ -18,15 +18,51 @@ public class JavaCalculation implements Calculation {
             @Override
             public void run() {
                 statusHandler.sendEmptyMessage(Constants.MSG_START);
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                calculate(statusHandler);
                 statusHandler.sendEmptyMessage(Constants.MSG_END);
             }
         };
         calcThread.start();
+    }
+
+    private void calculate(Handler statusHandler) {
+        boolean[] numbers = new boolean[limit + 1];
+        numbers[0] = true;
+        numbers[1] = true;
+        numbers[2] = true;
+        int p = 2;
+        while (p < limit) {
+            markNonPrimes(numbers, p);
+            p = findNextPrime(numbers, p);
+        }
+        String primeList = getPrimes(numbers);
+        statusHandler.obtainMessage(Constants.MSG_STATUS, primeList).sendToTarget();
+    }
+
+    private String getPrimes(boolean[] numbers) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i <= limit; i++) {
+            if (!numbers[i]) {
+                sb.append(i);
+                sb.append(", ");
+            }
+        }
+        return sb.toString();
+    }
+
+    private void markNonPrimes(boolean[] numbers, int p) {
+        for (int i = 2 * p; i <= limit; i += p) {
+            numbers[i] = true;
+        }
+    }
+
+    private int findNextPrime(boolean[] numbers, int p) {
+        for (int i = p + 1; i <= limit; i++) {
+            if (!numbers[i]) {
+                return i;
+            }
+        }
+        return limit;
     }
 
 }
