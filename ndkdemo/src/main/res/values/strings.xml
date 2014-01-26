@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NdkIntelDemo</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">x86 demo</string>
+    <string name="label_limit">Prime limit:</string>
+    <string name="check_native">Use native</string>
+    <string name="button_start">Start</string>
 </resources>
