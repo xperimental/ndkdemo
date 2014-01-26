@@ -21,6 +21,8 @@ public class NativeCalculation implements Calculation {
                 int primeCount = countPrimes(limit);
                 String msg = String.format("%d primes found.", primeCount);
                 statusHandler.obtainMessage(Constants.MSG_STATUS, msg).sendToTarget();
+                String abi = String.format("ABI: %s", getAbi());
+                statusHandler.obtainMessage(Constants.MSG_STATUS, abi).sendToTarget();
                 statusHandler.sendEmptyMessage(Constants.MSG_END);
             }
         };
@@ -28,6 +30,8 @@ public class NativeCalculation implements Calculation {
     }
 
     public native int countPrimes(int limit);
+
+    public native String getAbi();
 
     static {
         System.loadLibrary("ndkdemo");
