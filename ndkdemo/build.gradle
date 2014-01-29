@@ -9,6 +9,7 @@ android {
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
+        packageName "net.sourcewalker.ndkdemo"
 
         ndk {
             moduleName "ndkdemo"
@@ -18,13 +19,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            jniDebugBuild true
+        }
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
-    buildTypes.debug.jniDebugBuild true
 
     productFlavors {
         x86 {
@@ -36,18 +38,21 @@ android {
             // It must be higher than the arm one for devices supporting
             // both, as x86 is preferred.
             versionCode = 3
+            packageName defaultConfig.packageName + ".x86"
         }
         arm {
             ndk {
                 abiFilter "armeabi-v7a"
             }
             versionCode = 2
+            packageName defaultConfig.packageName + ".arm"
         }
         mips {
             ndk {
                 abiFilter "mips"
             }
             versionCode = 1
+            packageName defaultConfig.packageName + ".mips"
         }
         fat {
             // fat binary, lowest version code to be
